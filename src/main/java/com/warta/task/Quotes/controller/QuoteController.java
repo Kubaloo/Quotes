@@ -6,7 +6,6 @@ import com.warta.task.Quotes.dto.mapper.QuoteDtoMapper;
 import com.warta.task.Quotes.model.Quote;
 import com.warta.task.Quotes.repo.QuoteRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,10 +48,9 @@ public class QuoteController {
     }
 
     @PostMapping
-    public ResponseEntity saveNewQuote(@Valid @RequestBody QuoteDto quoteDto) {
+    public Quote saveNewQuote(@Valid @RequestBody QuoteDto quoteDto) {
         Quote entity = quoteDtoMapper.convertToEntity(quoteDto);
-        quoteRepository.save(entity);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return quoteRepository.save(entity);
     }
 
     @PutMapping("/{quoteId}")
