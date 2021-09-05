@@ -48,9 +48,10 @@ public class QuoteController {
     }
 
     @PostMapping
-    public Quote saveNewQuote(@Valid @RequestBody QuoteDto quoteDto) {
+    public QuoteDto saveNewQuote(@Valid @RequestBody QuoteDto quoteDto) {
         Quote entity = quoteDtoMapper.convertToEntity(quoteDto);
-        return quoteRepository.save(entity);
+        quoteRepository.save(entity);
+        return quoteDto;
     }
 
     @PutMapping("/{quoteId}")
